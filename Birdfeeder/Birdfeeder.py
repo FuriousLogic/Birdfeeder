@@ -13,8 +13,8 @@ def nextTweet():
 		accessTokenSecret = 'JL5x5Hf0Sa0RG5FfR6TwTq5HmluED9bf06QMmkUT3CT4i'
 		api = Twython(apiKey,apiSecret,accessToken,accessTokenSecret)
 
-		sourceFile = 'toTweet.txt'
-		targetFile = 'tweeted.txt'
+		sourceFile = '/media/usb/toTweet.txt'
+		targetFile = '/media/usb/tweeted.txt'
 
 		#Open feed file
 		with open(sourceFile,'r') as f:
@@ -37,7 +37,7 @@ def nextTweet():
 		f.closed
 
 		#Remove line from source
-		tempfilename = datetime.datetime.now().strftime('%Y%B%d%I%M') + '.txt'
+		tempfilename = '/media/usb/' + datetime.datetime.now().strftime('%Y%B%d%I%M') + '.txt'
 		with open(sourceFile, "r") as input:
 			with open(tempfilename, "w+") as output: 
 				for line in input:
