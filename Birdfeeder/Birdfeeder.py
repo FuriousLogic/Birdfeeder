@@ -3,18 +3,25 @@ import os.path
 import datetime
 import sys
 import time
-from twython import Twython
+from configparser import ConfigParser
+
+canTweet = True
+try:
+    from twython import Twython
+except:
+    canTweet = False
 
 def nextTweet():
 	try:
-		apiKey = 'YCoDZEBfVYDptrzvdsOzLJnww'
-		apiSecret = 'u6pfm5IIIXQy2z8K9Msx8LYFR2MVoFOjJMbVrPZBtW1cZugmvj'
-		accessToken = '1134849985269440513-1ZPjMVU1KbAiooHNpitovDPcDcX9bP'
-		accessTokenSecret = 'JL5x5Hf0Sa0RG5FfR6TwTq5HmluED9bf06QMmkUT3CT4i'
-		api = Twython(apiKey,apiSecret,accessToken,accessTokenSecret)
+		if canTweet:
+		    apiKey = twConfig['tokens']['apiKey']
+		    apiSecret = twConfig['tokens']['apiSecret']
+		    accessToken = twConfig['tokens']['accessToken']
+		    accessTokenSecret = twConfig['tokens']['accessTokenSecret']
+		    api = Twython(apiKey,apiSecret,accessToken,accessTokenSecret)
 
-		sourceFile = '/media/usb/toTweet.txt'
-		targetFile = '/media/usb/tweeted.txt'
+		sourceFile = fConfig['files']['sourceFile']
+		targetFile = fConfig['files']['targetFile']
 
 		#Open feed file
 		with open(sourceFile,'r') as f:
@@ -25,7 +32,10 @@ def nextTweet():
 			print('nothing to tweet')
 			quit()
 
-		api.update_status(status=tweetText)
+		if canTweet:
+			api.update_status(status=tweetText)
+		else:
+			print('TWEET: ' + tweetText)
 
 		#open target file
 		if os.path.exists(targetFile)==False:
@@ -49,6 +59,11 @@ def nextTweet():
 	except BaseException as err:
 		print('error:', err)
 
+#Main Code body
+twConfig = ConfigParser()
+twConfig.read('twitter.ini')
+fConfig = ConfigParser()
+fConfig.read('files.ini')
 while True:
 	nextTweet()
 	time.sleep(600)
