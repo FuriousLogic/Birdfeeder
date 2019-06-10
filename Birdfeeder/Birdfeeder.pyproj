@@ -27,6 +27,7 @@
     <Content Include="files.ini" />
     <Content Include="files_Dev.ini" />
     <Content Include="files_Pi.ini" />
+    <Content Include="settings.ini" />
     <Content Include="twitter.ini" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

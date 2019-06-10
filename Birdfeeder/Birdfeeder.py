@@ -61,9 +61,12 @@ def nextTweet():
 
 #Main Code body
 twConfig = ConfigParser()
-twConfig.read('twitter.ini')
 fConfig = ConfigParser()
+sConfig = ConfigParser()
+twConfig.read('twitter.ini')
 fConfig.read('files.ini')
+sConfig.read('settings.ini')
+secondsBetweenTweets = int(sConfig["birdfeederSettings"]["minutesBetweenTweets"])*60
 while True:
 	nextTweet()
-	time.sleep(600)
+	time.sleep(secondsBetweenTweets)
