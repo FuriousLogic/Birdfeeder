@@ -3,6 +3,7 @@
 
 #system specific files
 twitter.ini
+*.ini
 
 # User-specific files
 *.suo
