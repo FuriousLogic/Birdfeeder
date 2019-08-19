@@ -9,11 +9,20 @@ canTweet = True
 try:
     from twython import Twython
 except:
-    canTweet = False
+	print("can't load twython")
+	canTweet = False
+
+try:
+    from TwitterAPI import TwitterAPI
+except:
+	print("can't load TwitterAPI")
+	canTweet = False
+
 try:
     from threader import Threader
 except:
-    canTweet = False
+	print("can't load threader")
+	canTweet = False
 
 def nextTweet():
 	try:
